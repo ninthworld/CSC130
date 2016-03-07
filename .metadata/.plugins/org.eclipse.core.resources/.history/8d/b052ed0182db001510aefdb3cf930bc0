@@ -1,0 +1,18 @@
+package org.ninthworld.assignment1;
+
+public class DivideAndConquer {
+	
+	public static void main(String[] args){
+		
+	}
+	
+	public void MMult(int[][] A, int[][] B, int n){
+		
+	}
+}
+
+class Matrix {
+	int[][] vals = new int[2][2];
+	
+	
+}

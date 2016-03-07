@@ -1,0 +1,83 @@
+package org.ninthworld.assignment2;
+
+import java.awt.Color;
+import java.util.Random;
+
+import javax.swing.JFrame;
+
+public class Main {
+	
+	private JFrame frame;
+	private DisplayAVLTree avlPanel;
+	private AVLTree tree;
+	
+	public Main(){
+		tree = new AVLTree();
+		
+		frame = new JFrame("AVL Tree");
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(640, 480);
+		frame.setBackground(Color.decode("#3F3F49"));
+		
+		avlPanel = new DisplayAVLTree(tree);
+		frame.add(avlPanel);
+		
+		new Thread(new Runnable(){
+			public void run(){
+				for(int i=0; i<100; i++){
+					tree.insert(i);
+					frame.repaint();
+					
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}
+	
+	public static void main(String[] args){
+		// new Main();
+		
+		Random rand = new Random(12345L);
+		int maxInts = (int)Math.pow(2, 16);
+		int[] incInts = new int[maxInts],
+			  decInts = new int[maxInts],
+			  rndInts = new int[maxInts];
+		
+		for(int i=0; i<maxInts; i++){
+			incInts[i] = i;
+			decInts[i] = maxInts - (i+1);
+			rndInts[i] = rand.nextInt(maxInts);
+		}
+
+		double[] tests = new double[4];
+		System.out.printf("(AVL Tree)\n\n");
+		System.out.printf("Increasing - ");
+		for(int i=0; i<tests.length; i++){
+			tests[i] = testAVLTreeMilli(incInts);
+			System.out.printf("%6.1fms, ", tests[i]);
+		}
+		System.out.printf("%s - %6.1fms\n\n", msg, (end - start) / 1000000.0);
+		
+		testAVLTree(incInts, "(AVL Tree) Increasing");
+		testAVLTree(incInts, "(AVL Tree) Decreasing");
+		testAVLTree(incInts, "(AVL Tree) Random    ");
+	}
+	
+	public static double testAVLTreeMilli(int[] values){
+		long start, end;
+		AVLTree avlTree = new AVLTree();
+		
+		start = System.nanoTime();
+		for(int i : values){
+			avlTree.insert(i);
+		}
+		end = System.nanoTime();
+		
+		return (end - start) / 1000000.0;
+	}
+}

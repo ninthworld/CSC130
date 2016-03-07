@@ -1,0 +1,111 @@
+package org.ninthworld.assignment1;
+
+public class DivideAndConquer {
+	
+	public static void main(String[] args){
+		
+		Matrix parent1 = new Matrix();
+		parent1.setVal(0, 0, new Matrix(1));
+		parent1.setVal(0, 1, new Matrix(2));
+		parent1.setVal(1, 0, new Matrix(3));
+		parent1.setVal(1, 1, new Matrix(4));
+		
+		Matrix parent2 = new Matrix();
+		parent2.setVal(0, 0, new Matrix(1));
+		parent2.setVal(0, 1, new Matrix(2));
+		parent2.setVal(1, 0, new Matrix(3));
+		parent2.setVal(1, 1, new Matrix(4));
+		
+		Matrix output = MMult(parent1, parent2, 2);
+		
+	}
+	
+	public Matrix MMult(Matrix A, Matrix B, int n){
+		if(n == 1){
+			return Matrix.mul(A, B);
+		}else{
+			Matrix C = new Matrix();
+			
+			Matrix x1 = MMult( (Matrix) A.getVal(0, 0), (Matrix) B.getVal(0, 0), n/2 );
+			Matrix x2 = MMult( (Matrix) A.getVal(0, 1), (Matrix) B.getVal(1, 0), n/2 );
+			Matrix x3 = MMult( (Matrix) A.getVal(0, 0), (Matrix) B.getVal(0, 1), n/2 );
+			Matrix x4 = MMult( (Matrix) A.getVal(0, 1), (Matrix) B.getVal(1, 1), n/2 );
+			Matrix x5 = MMult( (Matrix) A.getVal(1, 0), (Matrix) B.getVal(0, 0), n/2 );
+			Matrix x6 = MMult( (Matrix) A.getVal(1, 1), (Matrix) B.getVal(1, 0), n/2 );
+			Matrix x7 = MMult( (Matrix) A.getVal(1, 0), (Matrix) B.getVal(0, 1), n/2 );
+			Matrix x8 = MMult( (Matrix) A.getVal(1, 1), (Matrix) B.getVal(1, 1), n/2 );
+			
+			C.setVal(0, 0, Matrix.add(x1,  x2));
+			C.setVal(0, 1, Matrix.add(x3,  x4));
+			C.setVal(1, 0, Matrix.add(x5,  x6));
+			C.setVal(1, 1, Matrix.add(x7,  x8));
+			
+			return C;
+		}
+	}
+}
+
+class Matrix {
+	private Object[][] vals = new Object[2][2];
+	
+	public Matrix(){
+	}
+	
+	public Matrix(int val){
+		this.vals[0][0] = val;
+		this.vals[0][1] = val;
+		this.vals[1][0] = val;
+		this.vals[1][1] = val;
+	}
+	
+	public Matrix(int a, int b, int c, int d){
+		this.vals[0][0] = a;
+		this.vals[0][1] = b;
+		this.vals[1][0] = c;
+		this.vals[1][1] = d;
+	}
+	
+	public void setVal(int i, int j, Object val){
+		if(validIndex(i, j)){
+			vals[i][j] = val;
+		}
+	}
+	
+	public Object getVal(int i, int j) throws IllegalArgumentException {
+		if(validIndex(i, j)){
+			return vals[i][j];
+		}else{
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	public int getNum(int i, int j) throws IllegalArgumentException {
+		return (Integer) getVal(i, j);
+	}
+	
+	public boolean validIndex(int i, int j){
+		return (i >= 0 && i < vals.length && j >= 0 && j < vals[0].length);
+	}
+	
+	public static Matrix mul(Matrix A, Matrix B){
+		Matrix C = new Matrix();
+		
+		C.setVal(0, 0, A.getNum(0, 0) * B.getNum(0, 0) + A.getNum(0, 1) * B.getNum(1, 0));
+		C.setVal(0, 1, A.getNum(0, 0) * B.getNum(0, 1) + A.getNum(0, 1) * B.getNum(1, 1));
+		C.setVal(1, 0, A.getNum(1, 0) * B.getNum(0, 0) + A.getNum(1, 1) * B.getNum(1, 0));
+		C.setVal(0, 0, A.getNum(1, 0) * B.getNum(0, 1) + A.getNum(1, 1) * B.getNum(1, 1));
+		
+		return C;
+	}
+	
+	public static Matrix add(Matrix A, Matrix B){
+		Matrix C = new Matrix();
+		
+		C.setVal(0, 0, A.getNum(0, 0) + B.getNum(0, 0));
+		C.setVal(0, 1, A.getNum(0, 1) + B.getNum(0, 1));
+		C.setVal(1, 0, A.getNum(1, 0) + B.getNum(1, 0));
+		C.setVal(1, 1, A.getNum(1, 1) + B.getNum(1, 1));
+		
+		return C;
+	}
+}

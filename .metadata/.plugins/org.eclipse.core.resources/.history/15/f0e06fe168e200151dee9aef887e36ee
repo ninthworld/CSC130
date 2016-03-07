@@ -1,0 +1,10 @@
+package org.ninthworld.assignment2;
+
+public class AVLTree {
+	
+	private AVLNode root;
+	
+	public AVLTree(){
+		
+	}
+}

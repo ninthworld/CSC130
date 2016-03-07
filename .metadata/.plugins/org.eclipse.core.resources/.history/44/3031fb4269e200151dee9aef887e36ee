@@ -1,0 +1,23 @@
+package org.ninthworld.assignment2;
+
+public class AVLTree {
+	
+	private AVLNode root;
+	
+	public AVLTree(){
+	}
+	
+	public AVLNode getRoot(){
+		return root;
+	}
+	
+	// 
+	public boolean insert(int value){
+		if(root == null){
+			root = new AVLNode(value);
+			return true;
+		}else{
+			return root.insert(value);
+		}
+	}
+}

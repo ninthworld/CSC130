@@ -1,0 +1,31 @@
+package org.ninthworld.assignment2;
+
+public class AVLTree {
+	
+	private AVLNode root;
+	
+	public AVLTree(){
+	}
+	
+	public AVLNode getRoot(){
+		return root;
+	}
+	
+	public void setRoot(AVLNode node){
+		root = node;
+	}
+	
+	/**
+	 * Inserts a value into the AVLTree
+	 * @param value the int to be inserted
+	 * @return true if insertion was successful, false the value already exists
+	 */
+	public boolean insert(int value){
+		if(getRoot() == null){
+			setRoot(new AVLNode(value));
+		}else{
+			return getRoot().insert(value);
+		}
+		return true;
+	}
+}
