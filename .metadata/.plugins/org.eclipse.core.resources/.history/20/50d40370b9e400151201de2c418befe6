@@ -1,0 +1,7 @@
+package org.ninthworld.trees;
+
+public class BSNode {
+	
+	private int value;
+	private BSNode left, right;
+}

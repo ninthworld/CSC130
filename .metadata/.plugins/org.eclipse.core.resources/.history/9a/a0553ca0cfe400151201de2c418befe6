@@ -1,0 +1,24 @@
+package org.ninthworld.binarytrees;
+
+public class RBTree extends BSTree {
+	
+	private RBNode root;
+	
+	public RBTree() {
+		super();
+		this.root = null;
+	}
+
+	public RBNode getRoot() {
+		return root;
+	}
+
+	public void setRoot(RBNode root) {
+		this.root = root;
+	}
+	
+	public void insert(int value){
+		RBTree.insert(value, root);
+	}
+
+}

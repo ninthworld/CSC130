@@ -1,0 +1,14 @@
+package org.ninthworld.trees;
+
+public class AVLNode {
+
+	private int value;
+	private AVLNode left, right;
+	
+	public AVLNode(int value) {
+		this.value = value;
+		this.left = null;
+		this.right = null;
+	}
+
+}

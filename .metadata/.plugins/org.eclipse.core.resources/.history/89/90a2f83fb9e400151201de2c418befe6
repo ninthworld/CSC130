@@ -1,0 +1,14 @@
+package org.ninthworld.trees;
+
+public class BSTree {
+	
+	private BSNode root;
+	
+	public BSTree(){
+		this.root = null;
+	}
+	
+	public void insert(int value){
+		
+	}
+}

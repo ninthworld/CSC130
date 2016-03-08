@@ -1,0 +1,17 @@
+package org.ninthworld.binarytrees;
+
+public class RBTree extends BSTree {
+	
+	private enum {RED, BLACK};
+	private int value;
+	private RBNode left, right;
+	
+	public RBTree() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
+
+private enum RBTree {
+	RED, BLACK
+}

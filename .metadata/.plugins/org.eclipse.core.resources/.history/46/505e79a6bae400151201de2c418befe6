@@ -1,0 +1,10 @@
+package org.ninthworld.trees;
+
+public class AVLNode extends BSNode {
+
+	public AVLNode(int value) {
+		super(value);
+		// TODO Auto-generated constructor stub
+	}
+
+}

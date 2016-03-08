@@ -1,0 +1,64 @@
+package org.ninthworld.binarytrees;
+
+public class BSTree {
+	
+	private BSNode root;
+	
+	public BSTree(){
+		this.root = null;
+	}
+	
+	public void insert(int value){
+		root = BSTree.insert(value, root);
+	}
+	
+	public void remove(int value){
+		root = BSTree.remove(value, root);
+	}
+	
+	public BSNode search(int value){
+		return BSTree.search(value, root);
+	}
+	
+	private static BSNode insert(int value, BSNode node){
+		if(node == null){
+			node = new BSNode(value);
+		}else{
+			if(value == node.getValue()){
+				return node;
+			}else if(value > node.getValue()){
+				node.setRight( insert(value, node.getRight()) );
+			}else{
+				node.setLeft( insert(value, node.getLeft()) );
+			}
+		}
+		
+		return node;
+	}
+	
+	private static BSNode remove(int value, BSNode node){
+		if(node == null){
+			return node;
+		}else{
+			if(value == node.getValue()){
+				if(node.getLeft() == null || node.getRight() == null){
+					if(node.getLeft() == null && node.getRight() == null){
+						return null;
+					}else if(node.getLeft() == null){
+						return node.getRight();
+					}else{
+						return node.getLeft();
+					}
+				}else{
+					
+				}
+			}else if(value > node.getValue()){
+				node.setRight( remove(value, node.getRight()) );
+			}else{
+				node.setLeft( remove(value, node.getLeft()) );
+			}
+		}
+		
+		return node;
+	}
+}

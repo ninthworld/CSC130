@@ -1,0 +1,5 @@
+package org.ninthworld.trees;
+
+public class BSTree {
+
+}

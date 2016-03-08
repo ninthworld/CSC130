@@ -1,0 +1,6 @@
+package org.ninthworld.trees;
+
+public class AVLTree extends BSTree {
+
+	
+}

@@ -1,0 +1,13 @@
+package org.ninthworld.binarytrees;
+
+public class RBNode extends BSNode {
+
+	public RBNode() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
+
+enum RBColor {
+	RED, BLACK
+};

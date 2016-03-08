@@ -1,0 +1,13 @@
+package org.ninthworld.trees;
+
+public class BSNode {
+	
+	private int value;
+	private BSNode left, right;
+	
+	public BSNode(int value){
+		this.value = value;
+		this.left = null;
+		this.right = null;
+	}
+}
