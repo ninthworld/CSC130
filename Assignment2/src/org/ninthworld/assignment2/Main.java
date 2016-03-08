@@ -40,10 +40,10 @@ public class Main {
 	}
 	
 	public static void main(String[] args){
-		new Main();
+		//new Main();
 		
-		/*Random rand = new Random(12345L);
-		int maxInts = (int)Math.pow(2, 12);
+		Random rand = new Random(12345L);
+		int maxInts = 1000; //(int)Math.pow(2, 12);
 		int[] incInts = new int[maxInts],
 			  decInts = new int[maxInts],
 			  rndInts = new int[maxInts];
@@ -57,7 +57,7 @@ public class Main {
 		System.out.printf("(AVL Tree)\n\n");
 		printAVLTreeAverage(incInts, 4, "Increasing");		
 		//printAVLTreeAverage(decInts, 4, "Decreasing");
-		//printAVLTreeAverage(rndInts, 4, "Random    ");*/
+		//printAVLTreeAverage(rndInts, 4, "Random    ");
 	}
 	
 	public static void printAVLTreeAverage(int[] values, int trials, String msg){
@@ -86,7 +86,7 @@ public class Main {
 		}
 		end = System.nanoTime();
 		
-		System.out.printf(" %d ", avlTree.getRoot().getHeight());
+		//System.out.printf(" %d ", avlTree.getRoot().getHeight());
 		
 		return (end - start) / 1000000.0;
 	}

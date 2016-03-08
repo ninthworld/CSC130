@@ -1,0 +1,9 @@
+package org.ninthworld.binarytrees;
+
+public class BSTest {
+
+	public BSTest() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

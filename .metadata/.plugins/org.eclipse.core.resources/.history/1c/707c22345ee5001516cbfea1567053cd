@@ -1,0 +1,15 @@
+package org.ninthworld.binarytrees;
+
+import javax.swing.JPanel;
+
+public class DisplayGraph extends JPanel {
+
+	public DisplayGraph() {
+		
+	}
+	
+	public void paintComponent(Graphics g){
+		
+	}
+
+}

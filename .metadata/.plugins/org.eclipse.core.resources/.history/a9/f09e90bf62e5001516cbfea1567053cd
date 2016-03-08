@@ -1,0 +1,9 @@
+package org.ninthworld.binarytrees;
+
+public class DisplayGraphData {
+
+	public DisplayGraphData() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

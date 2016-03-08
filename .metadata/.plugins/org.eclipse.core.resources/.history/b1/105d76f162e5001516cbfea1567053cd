@@ -1,0 +1,20 @@
+package org.ninthworld.binarytrees;
+
+import java.awt.Color;
+
+public class DisplayGraphData {
+
+	private double x, y;
+	private Color color;
+	
+	public DisplayGraphData(double x, double y) {
+		super.DisplayGraphData(x, y, Color.BLACK);
+	}
+	
+	public DisplayGraphData(double x, double y, Color color) {
+		this.x = x;
+		this.y = y;
+		this.color = color;
+	}
+
+}

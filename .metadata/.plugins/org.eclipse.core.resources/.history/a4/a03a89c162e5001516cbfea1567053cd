@@ -1,0 +1,8 @@
+package org.ninthworld.binarytrees;
+
+public class DisplayGraphData {
+
+	public DisplayGraphData() {
+	}
+
+}

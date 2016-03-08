@@ -1,0 +1,38 @@
+package org.ninthworld.binarytrees;
+
+import java.awt.Color;
+import java.util.Random;
+
+import javax.swing.JFrame;
+
+public class Main {
+	
+	public Main(){
+		BSTree tree = new RBTRee();
+		for(int i=0; i<10; i++){
+			tree.insert(i);
+		}
+		displayTree(tree);
+	}
+	
+	public void displayTree(BSTree tree){
+		JFrame frame = new JFrame("Binary Search Tree");
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(640, 480);
+		frame.setBackground(Color.decode("#3F3F49"));
+		
+		DisplayBSTree bsPanel = new DisplayBSTree(tree);
+		frame.add(bsPanel);
+		
+		new Thread(new Runnable(){
+			public void run(){
+				frame.repaint();
+			}
+		}).start();
+	}
+	
+	public static void main(String[] args){
+		new Main();
+	}
+}
