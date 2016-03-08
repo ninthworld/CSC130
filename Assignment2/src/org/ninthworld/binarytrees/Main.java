@@ -11,8 +11,9 @@ public class Main {
 	private DisplayBSTree bsPanel;
 	
 	public Main(){
-		AVLTree tree = new AVLTree();
+		//AVLTree tree = new AVLTree();
 		//BSTree tree = new BSTree();
+		RBTree tree = new RBTree();
 		
 		frame = new JFrame("AVL Tree");
 		frame.setVisible(true);
@@ -28,14 +29,17 @@ public class Main {
 				for(int i=0; i<16; i++){
 					tree.insert(i);
 					frame.repaint();
-				}
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+					
+					/*try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}*/
 				}
 				tree.remove(9);
 				tree.remove(8);
+				tree.remove(13);
+				tree.remove(7);
 				frame.repaint();
 			}
 		}).start();

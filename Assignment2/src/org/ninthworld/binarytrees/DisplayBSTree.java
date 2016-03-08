@@ -8,6 +8,8 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
+import org.ninthworld.binarytrees.RBNode.RBColor;
+
 public class DisplayBSTree extends JPanel {
 	
 	private BSTree tree;
@@ -43,6 +45,15 @@ public class DisplayBSTree extends JPanel {
 		
 		g.setColor(Color.WHITE);
 		g.fillOval(x - radius, y - radius, radius*2, radius*2);
+		
+		if(node instanceof RBNode){
+			if(((RBNode) node).getColor() == RBColor.BLACK){
+				g.setColor(Color.BLACK);
+			}else{
+				g.setColor(Color.RED);
+			}
+			g.drawOval(x - radius, y - radius, radius*2, radius*2);
+		}
 		
 		g.setColor(Color.decode("#3F3F49"));
 		g.drawString(strValue, x - strValueW/2, y + strValueH/4);
