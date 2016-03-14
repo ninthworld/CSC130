@@ -1,8 +1,8 @@
 package org.ninthworld.binarytrees;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Rectangle;
-import java.util.Random;
 
 import javax.swing.JFrame;
 
@@ -10,64 +10,76 @@ import org.ninthworld.binarytrees.BSTest.BSTestArrayType;
 
 public class Main {
 	
-	public Main(){
+	public static void main(String[] args){
 		
-		displayGraph();
+		int maxNum = 1000000;
+		int[] ascending = BSTest.generateArray(BSTestArrayType.INCREASING, maxNum);
+		int[] descending = BSTest.generateArray(BSTestArrayType.DECREASING, maxNum);
+		int[] randomized = BSTest.generateArray(BSTestArrayType.RANDOMIZED, maxNum);
+				
+		double avlIncTime = BSTest.insertTest(new AVLTree(), ascending);
+		double avlDecTime = BSTest.insertTest(new AVLTree(), descending);
+		double avlRndTime = BSTest.insertTest(new AVLTree(), randomized);
 		
-		/*
-		AVLTree avlTree = new AVLTree();
-		RBTree rbTree = new RBTree();
-		for(int i=0; i<10; i++){
-			avlTree.insert(i);
-			rbTree.insert(i);
-		}
-		displayTree(avlTree);
-		displayTree(rbTree);
-		*/
+		System.out.printf("AVL Tree Insert Times (for %d values) - \nAscending: %6.2fms, Descending: %6.2fms, Random: %6.2fms\n\n", maxNum, avlIncTime, avlDecTime, avlRndTime);
 		
-		/*
-		int[] incArray = BSTest.generateArray(BSTestArrayType.INCREASING, 1000);
-		for(int i=0; i<4; i++){
-			double avlMS = BSTest.insertTest(new AVLTree(), incArray);		
-			System.out.printf("%5.1fms ", avlMS);	
-		}
-		*/
+		double rbIncTime = BSTest.insertTest(new RBTree(), ascending);
+		double rbDecTime = BSTest.insertTest(new RBTree(), descending);
+		double rbRndTime = BSTest.insertTest(new RBTree(), randomized);
+
+		System.out.printf("Red-Black Tree Insert Times (for %d values) - \nAscending: %6.2fms, Descending: %6.2fms, Random: %6.2fms\n\n", maxNum, rbIncTime, rbDecTime, rbRndTime);
+		
+		// Optional: Display graph of data points
+		displayGraph("AVL Tree", new AVLTree());
+		displayGraph("Red-Black Tree", new RBTree());
 	}
 	
-	public void displayGraph(){
-		int width = 640, height = 480;
-		JFrame frame = new JFrame("Binary Search Tree");
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(width, height);
-		frame.setBackground(Color.decode("#3F3F49"));
-		
+	public static void displayGraph(String title, BSTree type){
 		int maxValue = 1000000;
 		int[] incArray = BSTest.generateArray(BSTestArrayType.INCREASING, maxValue);
 		int[] decArray = BSTest.generateArray(BSTestArrayType.DECREASING, maxValue);
 		int[] rndArray = BSTest.generateArray(BSTestArrayType.RANDOMIZED, maxValue);
-		
+
+		int width = 720, height = 640;
+		JFrame frame = new JFrame(title);
 		Rectangle rect = new Rectangle(10, 10, 80, 80);
-		DisplayGraph graph = new DisplayGraph(rect, maxValue, 100);
+		DisplayGraph graph = new DisplayGraph(rect, maxValue, 1000);
+		
+		frame.setBackground(Color.decode("#3F3F49"));
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(width, height);
 		frame.add(graph);
 		
 		new Thread(new Runnable(){
 			public void run(){
-				int intervals = 10, trials = 1;
+				int intervals = 40, trials = 3;
 				for(int i=0; i<intervals; i++){
 					for(int j=0; j<trials; j++){
 						double x = i*(maxValue/intervals);
-						double yInc = BSTest.insertTest(new AVLTree(), incArray, (int) x);
-						double yDec = BSTest.insertTest(new AVLTree(), decArray, (int) x);
-						double yRnd = BSTest.insertTest(new AVLTree(), rndArray, (int) x);
+						double yInc, yDec, yRnd;
+						
+						if(type instanceof AVLTree){
+							yInc = BSTest.insertTest(new AVLTree(), incArray, (int) x);
+							yDec = BSTest.insertTest(new AVLTree(), decArray, (int) x);
+							yRnd = BSTest.insertTest(new AVLTree(), rndArray, (int) x);
+						}else if(type instanceof RBTree){
+							yInc = BSTest.insertTest(new RBTree(), incArray, (int) x);
+							yDec = BSTest.insertTest(new RBTree(), decArray, (int) x);
+							yRnd = BSTest.insertTest(new RBTree(), rndArray, (int) x);							
+						}else{
+							yInc = BSTest.insertTest(new BSTree(), incArray, (int) x);
+							yDec = BSTest.insertTest(new BSTree(), decArray, (int) x);
+							yRnd = BSTest.insertTest(new BSTree(), rndArray, (int) x);							
+						}
 						
 						graph.addData(new DisplayGraphData(x, yInc, Color.BLUE));
 						graph.addData(new DisplayGraphData(x, yDec, Color.GREEN));
 						graph.addData(new DisplayGraphData(x, yRnd, Color.RED));
-						frame.repaint();
+						graph.repaint();
 						
 						try {
-							Thread.sleep(10);
+							Thread.sleep(1000/60);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -75,27 +87,5 @@ public class Main {
 				}
 			}
 		}).start();
-		
-	}
-	
-	public void displayTree(BSTree tree){
-		JFrame frame = new JFrame("Binary Search Tree");
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(640, 480);
-		frame.setBackground(Color.decode("#3F3F49"));
-		
-		DisplayBSTree bsPanel = new DisplayBSTree(tree);
-		frame.add(bsPanel);
-		
-		new Thread(new Runnable(){
-			public void run(){
-				frame.repaint();
-			}
-		}).start();
-	}
-	
-	public static void main(String[] args){
-		new Main();
 	}
 }

@@ -1,0 +1,22 @@
+package org.ninthworld.binarytrees;
+
+import org.ninthworld.binarytrees.BSTest.BSTestArrayType;
+
+public class Main {
+	
+	public static void main(String[] args){
+		
+		int maxNum = 1000000;
+		int[] ascending = BSTest.generateArray(BSTestArrayType.INCREASING, maxNum);
+		int[] decending = BSTest.generateArray(BSTestArrayType.DECREASING, maxNum);
+		int[] randomized = BSTest.generateArray(BSTestArrayType.RANDOMIZED, maxNum);
+				
+		double avlIncTime = BSTest.insertTest(new AVLTree(), ascending);
+		double avlDecTime = BSTest.insertTest(new AVLTree(), decending);
+		double avlRndTime = BSTest.insertTest(new AVLTree(), randomized);
+
+		double rbIncTime = BSTest.insertTest(new RBTree(), ascending);
+		double rbDecTime = BSTest.insertTest(new RBTree(), decending);
+		double rbRndTime = BSTest.insertTest(new RBTree(), randomized);
+	}
+}

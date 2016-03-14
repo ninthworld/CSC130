@@ -1,0 +1,17 @@
+package org.ninthworld.binarytrees;
+
+import org.ninthworld.binarytrees.BSTest.BSTestArrayType;
+
+public class Main {
+	
+	public static void main(String[] args){
+		
+		int maxNum = 1000000;
+		int[] ascending = BSTest.generateArray(BSTestArrayType.INCREASING, maxNum);
+		int[] decending = BSTest.generateArray(BSTestArrayType.DECREASING, maxNum);
+		int[] randomized = BSTest.generateArray(BSTestArrayType.RANDOMIZED, maxNum);
+		
+		
+		
+	}
+}

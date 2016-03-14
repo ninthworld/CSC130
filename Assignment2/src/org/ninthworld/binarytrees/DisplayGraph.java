@@ -27,13 +27,13 @@ public class DisplayGraph extends JPanel {
 		graphData.add(data);
 	}
 	
-	public void paintComponent(Graphics2D g){
+	public void paint(Graphics2D g){
 		Rectangle pos = scaleRect();
 		
 		// Background
 		g.setColor(Color.decode("#3F3F49"));
 		g.fillRect(0, 0, getWidth(), getHeight());
-		
+				
 		// Graph Background
 		g.setColor(Color.WHITE);
 		g.fillRect(pos.x, pos.y, pos.width, pos.height);
@@ -85,12 +85,13 @@ public class DisplayGraph extends JPanel {
 		}
 	}
 	
+	@Override
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setFont(new Font("Avant Garde", Font.PLAIN, 12));
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		
-		paintComponent(g2d);
+
+		paint(g2d);
 	}
 	
 	public Rectangle scaleRect(){
