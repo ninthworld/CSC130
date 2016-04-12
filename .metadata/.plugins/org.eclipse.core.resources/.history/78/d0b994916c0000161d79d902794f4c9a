@@ -1,0 +1,33 @@
+/**
+ * Created by Chris Swenson on 4/11/2016.
+ */
+public class Assignment3 {
+
+	public static void main(String[] args){
+		
+		char[] chars = "abc".toCharArray();
+		String[] invalid = {"ac", "ca"};
+		int len = 2;
+		
+		iterate(chars, len, new char[len], 0, invalid);
+	}
+	
+	public static void iterate(char[] chars, int len, char[] build, int pos, String[] invalid){
+		if(pos == len){
+			String word = new String(build);
+			for(String i : invalid){
+				if(word.contains(i)){
+					return;					
+				}
+			}
+			System.out.println(word);
+			return;
+		}
+		
+		for(int i=0; i<chars.length; i++){
+			build[pos] = chars[i];
+			iterate(chars, len, build, pos+1, invalid);
+		}
+	}
+
+}

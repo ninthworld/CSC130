@@ -1,0 +1,59 @@
+import java.util.Arrays;
+
+/**
+ * Created by Chris Swenson on 4/11/2016.
+ */
+public class Assignment3 {
+
+	public static void main(String[] args){		
+		char[] chars = ("abc").toCharArray();
+		String[] illegals = {"ac", "ca"};
+		int len = 1;
+		
+		int wordCount = 0;
+		long start, end;
+		for(int i=0; i<15; i++){
+			start = System.currentTimeMillis();
+			wordCount = iterate(chars, illegals, new char[len], 0, len);
+			end = System.currentTimeMillis();
+			System.out.printf("Found %d words of length %d using (%s) without (%s) in %dms.\n", wordCount, len, Arrays.toString(chars), Arrays.toString(illegals), end-start);
+			len++;
+		}
+	}
+	
+	public static int iterate(char[] chars, String[] illegals, char[] build, int pos, int end){
+		if(pos == end){
+			return 1;
+		}
+		
+		int count = 0;
+		iterate_loop:
+		for(int i=0; i<chars.length; i++){
+			build[pos] = chars[i];
+			
+			illegals_loop:
+			for(int j=0; j<illegals.length; j++){
+				if(pos >= illegals[j].length()-1){					
+					for(int k=illegals[j].length()-1; k>=0; k--){
+						if(chars[i-k] == illegals[j].charAt(k)){
+							if(k == 0){
+								continue iterate_loop;
+							}
+						}else{
+							continue illegals_loop;
+						}
+					}
+				}
+			}
+			count += iterate(chars, illegals, build, pos+1, end);
+			
+			/*
+			if(pos == 0 || (pos > 0 && !(i == 0 && build[pos-1] == 'c') && !(i == 2 && build[pos-1] == 'a'))){
+				count += iterate(chars, illegals, build, pos+1, end);
+			}*/
+		}
+		
+		return count;
+	}
+
+}

@@ -1,9 +1,0 @@
-package org.ninthworld.binarytrees;
-
-public class RBNode {
-
-	public RBNode() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

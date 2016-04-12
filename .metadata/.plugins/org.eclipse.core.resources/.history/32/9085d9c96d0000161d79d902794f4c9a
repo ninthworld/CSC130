@@ -1,0 +1,42 @@
+/**
+ * Created by Chris Swenson on 4/11/2016.
+ */
+public class Assignment3 {
+
+	public static void main(String[] args){
+		
+		char[] chars = "abc".toCharArray();
+		String[] invalid = {"ac", "ca"};
+		int len = 1;
+		
+		long start = 0, end = 0;
+		for(int i=0; i<15; i++){
+			start = System.currentTimeMillis();
+			int wordCount = iterate(chars, len, new char[len], 0, invalid);
+			end = System.currentTimeMillis();
+			System.out.printf("Found %d words of length %d in %dms.\n", wordCount, len, end-start);
+			len++;
+		}
+	}
+	
+	public static int iterate(char[] chars, int len, char[] build, int pos, String[] invalid){
+		if(pos == len){
+			String word = new String(build);
+			for(String i : invalid){
+				if(word.contains(i)){
+					return 0;					
+				}
+			}
+			return 1;
+		}
+		
+		int count = 0;
+		for(int i=0; i<chars.length; i++){
+			build[pos] = chars[i];
+			count += iterate(chars, len, build, pos+1, invalid);
+		}
+		
+		return count;
+	}
+
+}

@@ -1,0 +1,32 @@
+import java.util.Arrays;
+
+/**
+ * Created by Chris Swenson on 4/11/2016.
+ */
+public class Assignment3 {
+
+	public static void main(String[] args){		
+		char[] chars = ("abc").toCharArray();
+		int len = 8;
+		int wordCount = iterate(chars, new char[len], 0, len);
+		
+		System.out.printf("Found %d words of length %d.\n", wordCount, len);
+	}
+	
+	public static int iterate(char[] chars, char[] build, int pos, int end){
+		if(pos == end){
+			return 1;
+		}
+		
+		int count = 0;
+		for(int i=0; i<chars.length; i++){
+			build[pos] = chars[i];
+			if(pos == 0 || (pos > 0 && !(i == 0 && build[pos-1] == 'c') && !(i == 2 && build[pos-1] == 'a'))){
+				count += iterate(chars, build, pos+1, end);
+			}
+		}
+		
+		return count;
+	}
+
+}
