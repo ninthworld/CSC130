@@ -13,33 +13,6 @@ public class Assignment4 {
             numbers[i] = rand.nextInt();
         }
 
-
-        { // TEST CODE
-            int nthLargest, nth = 100, trials = 6, avg = 0;
-            long start, end;
-
-            for (int i = 0; i < trials; i++) {
-                Heap heap = new Heap(numbers);
-                start = System.currentTimeMillis();
-                nthLargest = heap.nthLargest(nth);
-                end = System.currentTimeMillis();
-                avg += (int) (end - start);
-                System.out.printf("HeapSort:    [%d]th largest number is %d in %dms\n", nth, nthLargest, end - start);
-            }
-            System.out.printf("HeapSort:    Average time of %dms.\n\n", avg / trials);
-
-            avg = 0;
-            for (int i = 0; i < trials; i++) {
-                QuickSelect quickSort = new QuickSelect(numbers);
-                start = System.currentTimeMillis();
-                nthLargest = quickSort.nthLargest(nth);
-                end = System.currentTimeMillis();
-                avg += (int) (end - start);
-                System.out.printf("QuickSelect: [%d]th largest number is %d in %dms\n", nth, nthLargest, end - start);
-            }
-            System.out.printf("QuickSelect: Average time of %dms.\n\n", avg / trials);
-        } // TEST CODE
-
         int nthLargest, nth = 12;
         String suffix = (nth == 1 ? "st" : (nth%10 == 2 && nth != 12 ? "nd" : (nth%10 == 3 && nth != 13 ? "rd" : "th" )));
 
